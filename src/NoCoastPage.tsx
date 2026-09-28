@@ -15,7 +15,7 @@ export function NoCoastPage() {
           <Reveal delay={150}><p className="intro-sub"><T>{nocoast.about}</T></p></Reveal>
           <Reveal delay={250}>
             <div className="closing-cta">
-              <a className="btn btn-green" href={nocoast.github} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> github.com/nocoastaec</a>
+              <a className="btn btn-accent" href={nocoast.github} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> github.com/nocoastaec</a>
               <a className="btn btn-light" href="#projects">← Back to projects</a>
             </div>
           </Reveal>

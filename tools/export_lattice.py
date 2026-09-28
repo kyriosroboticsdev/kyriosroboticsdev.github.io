@@ -35,7 +35,7 @@ FEATURED = ["it005_0", "it004_0", "it015_0", "it018_1", "it020_1", "it014_0"]
 
 # Turntable: FRAMES views around the vertical axis, packed COLS wide into one sprite sheet.
 FRAMES, COLS, PX = 60, 10, 440
-COLORS = {"eta": "#23865a", "sea": "#8a55c7"}
+COLORS = {"eta": "#6b3fa0", "sea": "#c2650a"}
 
 BLENDS = ["gyroid", "schwartz", "diamond", "re_entrant", "honeycomb", "elytra", "voronoi", "spinodoid", "bouligand"]
 PRETTY = {"schwartz": "Schwarz P", "re_entrant": "re-entrant", "gyroid": "gyroid", "diamond": "diamond",

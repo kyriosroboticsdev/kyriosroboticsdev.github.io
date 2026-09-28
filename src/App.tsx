@@ -35,7 +35,7 @@ export default function App() {
           <a href="#/nocoast" className={route === "nocoast" ? "on" : ""}>NoCoast</a>
           <a href="#contact">Contact</a>
         </div>
-        <a className="btn btn-green" href={GITHUB} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> GitHub</a>
+        <a className="btn btn-accent" href={GITHUB} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> GitHub</a>
       </nav>
 
       <main id="top">
@@ -44,7 +44,7 @@ export default function App() {
           <div className="blueprint" aria-hidden="true" />
           <div className="wrap center">
             <Label>{intro.label}</Label>
-            <Lead as="h1" lead={intro.title} />
+            <Lead as="h1" lead={NAME} tail={intro.descriptor} />
             <Reveal delay={200}><p className="intro-sub">{intro.sub}</p></Reveal>
             <Reveal delay={320}>
               <div className="thread" aria-label={intro.thread.join(", then ")}>
@@ -83,10 +83,10 @@ export default function App() {
           <div className="dots" aria-hidden="true" />
           <div className="wrap center">
             <Label dark>GET IN TOUCH</Label>
-            <h2 className="closing-title">Every project here has code<br />you can read.</h2>
+            <h2 className="closing-title">Want the story behind<br />any of these?</h2>
             <p className="closing-sub">Happy to walk through any of it: the design decisions, what broke, and what I'd do differently.</p>
             <div className="closing-cta">
-              {EMAIL && <a className="btn btn-green" href={`mailto:${EMAIL}`}>Email me</a>}
+              {EMAIL && <a className="btn btn-accent" href={`mailto:${EMAIL}`}>Email me</a>}
               <a className="btn btn-outline" href={GITHUB} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> GitHub</a>
             </div>
           </div>
@@ -130,8 +130,8 @@ function ProjectSection({ p, n }: { p: Project; n: number }) {
             <Fact label="RESULT"><p><T>{p.result}</T></p></Fact>
             {p.tags.length > 0 && <div className="tags">{p.tags.map((t) => <span key={t}>{t}</span>)}</div>}
             <div className="links">
-              {p.page && <a className="btn btn-green" href={p.page.href}>{p.page.label} <span aria-hidden="true">→</span></a>}
-              {p.links.length === 0 && <span className="dim">Code is private while the work is unpublished.</span>}
+              {p.page && <a className="btn btn-accent" href={p.page.href}>{p.page.label} <span aria-hidden="true">→</span></a>}
+              {p.privateCode && <span className="dim">Code is private while the work is unpublished.</span>}
               {p.links.map((l) => (
                 <a key={l.href} className="btn btn-light" href={l.href} target="_blank" rel="noreferrer">
                   {l.label === "GitHub" && <Icon name="github" size={14} />}{l.label}

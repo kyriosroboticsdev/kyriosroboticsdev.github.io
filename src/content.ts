@@ -7,9 +7,9 @@ export const EMAIL = ""; // optional: shown in the footer when set
 
 export const intro = {
   label: "PORTFOLIO · 2026",
-  title: "I build systems where robots, software and engineering meet.",
+  descriptor: "Engineer. Builder.",
   sub:
-    "Competition robots, engineering research and AI-powered software for real users. Each project below says what it is, what I personally did, and where you can check it. Most have a demo you can try right here.",
+    "I build systems where robots, software and engineering meet: competition robots, engineering research and AI-powered software for real users. Each project below says what it is, what I personally did, and where you can check it, and most have a demo you can try right here.",
   thread: ["Physical systems", "Robotics", "CAD", "Software", "AI", "Tools for people"],
 };
 
@@ -28,6 +28,7 @@ export interface Project {
   tags: string[];
   demo: Demo;
   page?: { label: string; href: string }; // a deeper page on this site
+  privateCode?: boolean;       // say so instead of showing links
   draft?: boolean;             // hidden from the live site until filled in
 }
 
@@ -48,7 +49,7 @@ export const projects: Project[] = [
       "Prebuilt Rome demo: the Colosseum valley, c. 320 AD, ~1,000 BIM elements",
       "Presentation site with a live, serverless demo; README and project documentation",
     ],
-    result: "[[Confirm exact wording: Best Design, AEC International Hackathon; only high-school team of seven.]]",
+    result: "Best Collaborative Project, AEC International Hackathon. Built by a team of 6 in 26 hours, among 40+ contestants.",
     links: [
       { label: "Live demo", href: "https://nocoast-aec-site.vercel.app" },
       { label: "GitHub", href: "https://github.com/nocoastaec/NoCoast-AEC" },
@@ -77,6 +78,7 @@ export const projects: Project[] = [
     result:
       "First autonomous run: 133 designs proposed, 27 simulated to a clean 20% crush, stopped itself after 25 iterations (~9.5 h of solver time). It identified two Schwarz P / diamond / elytra blends with nearly flat plateaus (η ≈ 0.82–0.87). Physical impact testing (Virginia Tech STAR protocol) is next.",
     links: [],
+    privateCode: true,
     tags: ["Python", "BoTorch", "CalculiX FEA", "XGBoost", "SHAP", "trimesh", "Fusion 360 API"],
     demo: "lattice",
   },
@@ -138,14 +140,17 @@ export const projects: Project[] = [
     id: "shuttleranked",
     title: "Shuttleranked",
     kicker: "INDEPENDENT · DEPLOYED",
-    what: "[[One sentence: what is it?]]",
-    role: "[[What did you personally do?]]",
-    built: ["[[Specific contributions]]"],
-    result: "[[Users? Deployment?]]",
-    links: [],
+    what: "Compete with your friends to see who's objectively the best badminton player. Every match you log moves an Elo rating, so the leaderboard settles it.",
+    role: "Sole developer. I designed and built the whole app, front to back.",
+    built: [
+      "Full-stack web app: frontend, backend and data layer",
+      "Elo rating algorithm written from scratch",
+      "Deployed and running in production",
+    ],
+    result: "Live with 30 active users, and up to 50 peak users a day.",
+    links: [], // [[Add the live URL and/or repo link]]
     tags: [],
     demo: "none",
-    draft: true,
   },
 ];
 
@@ -159,11 +164,11 @@ export const nocoast = {
     "[[One or two sentences: who NoCoast is. e.g. a student team that builds at hackathons and open-sources every project.]]",
   hackathons: [
     {
-      event: "[[AEC International Hackathon]]",
+      event: "AEC International Hackathon",
       date: "September 2026",
       project: "Tekt (NoCoast-AEC)",
       summary: "Prompt → BIM → IFC: describe a building in one sentence and get a real IFC model back, viewable in the browser or a 5 MB desktop app.",
-      award: "[[Best Design; only high-school team of seven]]",
+      award: "Best Collaborative Project · team of 6 among 40+ contestants · 26 hours",
       myPart: "Founding member and repo admin. Scaffolding, IFC-generation design with the backend developer, UI redesign, Tauri desktop app, tekt rebrand, Rome demo, presentation site and docs.",
       links: [
         { label: "Live demo", href: "https://nocoast-aec-site.vercel.app" },

@@ -7,11 +7,11 @@ export interface Design {
   frames?: { count: number; cols: number; px: number };
 }
 
-// Validated pair (CVD ΔE 17.7): green = best cushions, violet = what the loop chased.
-export const GREEN = "#23865a";
-export const VIOLET = "#8a55c7";
+// Validated on the banana surface (CVD ΔE 26.7, contrast ≥ 3:1): purple = best cushions, amber = what the loop chased.
+export const PURPLE = "#6b3fa0";
+export const AMBER = "#c2650a";
 export const catOf = (d: Design) => (d.frontEta ? "eta" : d.frontSea ? "sea" : "other");
-export const colorOf = (d: Design) => (d.frontEta ? GREEN : d.frontSea ? VIOLET : "var(--line-2)");
+export const colorOf = (d: Design) => (d.frontEta ? PURPLE : d.frontSea ? AMBER : "var(--line-2)");
 
 const W = 900, H = 330, M = { l: 56, r: 20, t: 16, b: 42 };
 const iw = W - M.l - M.r, ih = H - M.t - M.b;
@@ -115,9 +115,9 @@ export function Convergence({ history, reason }: { history: { iteration: number;
       <Axes xl="loop iteration" yl="front hypervolume"
         xt={[1, 5, 10, 15, 20, 25].filter((i) => i <= n).map((i) => [x(i), String(i)])}
         yt={Array.from({ length: max / 1e5 + 1 }, (_, i) => [y(i * 1e5), `${i * 100}k`])} />
-      <path d={history.map((p, i) => `${i ? "L" : "M"}${x(p.iteration)} ${y(p.hv)}`).join("")} fill="none" stroke={GREEN} strokeWidth={2} />
+      <path d={history.map((p, i) => `${i ? "L" : "M"}${x(p.iteration)} ${y(p.hv)}`).join("")} fill="none" stroke={PURPLE} strokeWidth={2} />
       <text x={iw} y={y(history[n - 1].hv) + 22} textAnchor="end" className="note-text">stopped: {reason}</text>
-      {h && <><line x1={x(h.iteration)} x2={x(h.iteration)} y1={0} y2={ih} className="cross" /><circle cx={x(h.iteration)} cy={y(h.hv)} r={4.5} fill={GREEN} stroke="var(--panel)" strokeWidth={2} /></>}
+      {h && <><line x1={x(h.iteration)} x2={x(h.iteration)} y1={0} y2={ih} className="cross" /><circle cx={x(h.iteration)} cy={y(h.hv)} r={4.5} fill={PURPLE} stroke="var(--panel)" strokeWidth={2} /></>}
     </Frame>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Convergence, StressStrain, Tradeoff, VIOLET, GREEN, catOf, colorOf, type Design } from "./charts";
+import { Convergence, StressStrain, Tradeoff, AMBER, PURPLE, catOf, colorOf, type Design } from "./charts";
 import { Turntable } from "./Turntable";
 
 interface LoopData {
@@ -63,8 +63,8 @@ export function LatticeLoop() {
             <div className="readout-row"><span>cushioning efficiency η</span><b>{d.eta.toFixed(3)}</b></div>
           </div>
           <div className="legend">
-            <span><i className="swatch" style={{ background: GREEN }} />best cushions (high η, low stress)</span>
-            <span><i className="swatch" style={{ background: VIOLET }} />loop's SEA front only</span>
+            <span><i className="swatch" style={{ background: PURPLE }} />best cushions (high η, low stress)</span>
+            <span><i className="swatch" style={{ background: AMBER }} />loop's SEA front only</span>
             <span><i className="swatch" style={{ background: "var(--line-2)" }} />other usable designs</span>
           </div>
         </div>
