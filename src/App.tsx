@@ -3,8 +3,9 @@ import { Label, Lead, Reveal } from "./components/bits";
 import { Icon } from "./components/Icon";
 import { Loader } from "./components/Loader";
 import { T } from "./components/T";
+import { ContactButtons } from "./components/Contact";
 import { reducedMotion } from "./lib/motion";
-import { EMAIL, GITHUB, NAME, intro, projects, stack, type Demo, type Project } from "./content";
+import { GITHUB, NAME, intro, projects, stack, type Demo, type Project } from "./content";
 import { CadDiffDemo } from "./demos/CadDiffDemo";
 import { LatticeLoop } from "./demos/lattice/LatticeLoop";
 import { NoCoastPage } from "./NoCoastPage";
@@ -89,7 +90,7 @@ export default function App() {
             <h2 className="closing-title">Want the story behind<br />any of these?</h2>
             <p className="closing-sub">Happy to walk through any of it: the design decisions, what broke, and what I'd do differently.</p>
             <div className="closing-cta">
-              {EMAIL && <a className="btn btn-accent" href={`mailto:${EMAIL}`}>Email me</a>}
+              <ContactButtons />
               <a className="btn btn-outline" href={GITHUB} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> GitHub</a>
             </div>
           </div>
@@ -101,6 +102,11 @@ export default function App() {
             <div>
               <div className="footer-head">PROJECTS</div>
               {shown.map((p) => <a key={p.id} href={`#${p.id}`}>{p.title}</a>)}
+            </div>
+            <div>
+              <div className="footer-head">CONTACT</div>
+              <ContactButtons variant="list" />
+              <a href={GITHUB} target="_blank" rel="noreferrer">GitHub</a>
             </div>
             <div>
               <div className="footer-head">TOOLS I USE</div>

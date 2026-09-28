@@ -3,7 +3,13 @@
 
 export const NAME = "Kailash Kannan";
 export const GITHUB = "https://github.com/kyriosroboticsdev";
-export const EMAIL = ""; // optional: shown in the footer when set
+// Contact buttons. email and whatsapp are reversed + base64 (see components/Contact.tsx) to keep them
+// away from scrapers. To change one: btoa("new value".split("").reverse().join("")) in a browser console.
+export const CONTACT = {
+  email: "bW9jLmxpYW1nQDYwbmFubmFraHNhbGlhaw==",
+  whatsapp: "MDMzNTkwNDQyMjE=", // digits with country code, no + or spaces
+  discord: "kyriosondakeys.",
+};
 
 export const intro = {
   label: "PORTFOLIO · 2026",

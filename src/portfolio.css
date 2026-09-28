@@ -246,3 +246,14 @@ mark.todo { background: var(--accent-soft); color: var(--accent-2); outline: 1px
 .readout-row.total { border-top: 1px dashed var(--line-2); padding-top: 8px; margin-top: 2px; }
 .readout-row.total b { color: var(--accent); }
 @media (max-width: 640px) { .elo-players { grid-template-columns: 1fr; } }
+
+/* ---------- contact ---------- */
+.closing .btn { cursor: pointer; }
+.btn-outline { background: none; }
+.link-btn { all: unset; cursor: pointer; color: #ddd0e8; font-size: 14px; }
+.link-btn:hover { color: #fff; }
+.link-btn:focus-visible { outline: 2px solid #f2d45c; outline-offset: 2px; }
+.footer { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+@media (max-width: 1000px) { .footer { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .footer { grid-template-columns: 1fr; } }
+.btn .handle { text-transform: none; letter-spacing: .02em; }
