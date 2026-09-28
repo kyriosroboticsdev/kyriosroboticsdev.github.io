@@ -1,0 +1,36 @@
+{
+  "schema": "nexus.cad-diff/1",
+  "generatedAt": "2026-06-11T14:32:05",
+  "before": { "name": "Comp Bot", "versionLabel": "v3 — 2026-06-08 19:12" },
+  "after": { "name": "Comp Bot", "versionLabel": "v4 — 2026-06-10 21:40" },
+  "ignored": ["ground", "ball", "field"],
+  "massProps": {
+    "before": {
+      "units": "in",
+      "massKg": 0.412, "massLb": 0.9083,
+      "volumeCm3": 152.4, "areaCm2": 410.2,
+      "bbox": [12.5, 8.0, 3.25], "com": [6.1, 4.0, 1.6], "bodyCount": 14
+    },
+    "after": {
+      "units": "in",
+      "massKg": 0.379, "massLb": 0.8356,
+      "volumeCm3": 140.1, "areaCm2": 398.7,
+      "bbox": [12.5, 8.0, 2.9], "com": [6.0, 4.0, 1.45], "bodyCount": 15
+    },
+    "delta": {
+      "massKg": -0.033, "massPct": -8.0,
+      "volumeCm3": -12.3, "bboxPct": [0.0, 0.0, -10.8], "bodyCount": 1
+    }
+  },
+  "components": {
+    "added": [{ "name": "Roller 7", "qty": 1 }],
+    "removed": [],
+    "changed": [{ "name": "Standoff 2in", "occurrenceDelta": -2 }]
+  },
+  "parameters": {
+    "added": [],
+    "removed": [],
+    "changed": [{ "name": "gearRatio", "from": "1 / 5", "to": "1 / 7" }]
+  },
+  "images": { "before": "before.png", "after": "after.png" }
+}
