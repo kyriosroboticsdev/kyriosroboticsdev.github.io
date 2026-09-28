@@ -15,6 +15,7 @@ export const intro = {
 
 export type Demo = "materials" | "lattice" | "cad-diff" | "none";
 
+
 export interface Project {
   id: string;
   title: string;
@@ -26,6 +27,7 @@ export interface Project {
   links: { label: string; href: string }[]; // 5. where to see it
   tags: string[];
   demo: Demo;
+  page?: { label: string; href: string }; // a deeper page on this site
   draft?: boolean;             // hidden from the live site until filled in
 }
 
@@ -36,42 +38,46 @@ export const projects: Project[] = [
     kicker: "AI · BIM · FULL-STACK",
     what:
       "Describe a building in plain English and get a real, editable building model back, in the IFC format that architects' and engineers' software opens.",
-    role: "[[Confirm: founding contributor and repository admin. Wrote the first commit, the scaffolding and the original prompt → IFC pipeline.]]",
+    role: "Founding member and repository admin. I started the repo and its scaffolding, and co-designed the IFC generation approach with the backend developer: I worked out how the IFC structure should be produced, in person and through diagrams, and he implemented it. I led the UI redesign, the desktop app shell and the presentation.",
     built: [
-      "Prompt → intermediate representation → IFC pipeline, with edit operations and versioning",
-      "Claude and local-model (GGUF) planner providers",
-      "Desktop app shell (Electron → Tauri, ~5 MB release build)",
-      "Viewer features: section slider, follow-build cut, selection as prompt context",
-      "Redesigned UI, tekt rebrand with light and dark themes",
-      "Presentation site with a live, serverless demo; project documentation",
+      "Repository scaffolding (frontend + backend) and the initial project structure",
+      "Design of the prompt → IFC generation approach, worked out with the backend developer",
+      "Redesigned UI, ported onto the team's versioned-projects API",
+      "Desktop app shell: Electron → Tauri, ~5 MB release build",
+      "tekt rebrand: logo, light and dark themes",
+      "Prebuilt Rome demo: the Colosseum valley, c. 320 AD, ~1,000 BIM elements",
+      "Presentation site with a live, serverless demo; README and project documentation",
     ],
     result: "[[Confirm exact wording: Best Design, AEC International Hackathon; only high-school team of seven.]]",
     links: [
       { label: "Live demo", href: "https://nocoast-aec-site.vercel.app" },
       { label: "GitHub", href: "https://github.com/nocoastaec/NoCoast-AEC" },
-      { label: "My commits", href: "https://github.com/nocoastaec/NoCoast-AEC/commits?author=kyriosroboticsdev" },
+      { label: "My UI PR (#3)", href: "https://github.com/nocoastaec/NoCoast-AEC/pull/3" },
+      { label: "My rebrand PR (#15)", href: "https://github.com/nocoastaec/NoCoast-AEC/pull/15" },
     ],
     tags: ["React", "TypeScript", "Python", "IfcOpenShell", "Tauri / Rust", "LLMs"],
     demo: "none",
+    page: { label: "NoCoast team page", href: "#/nocoast" },
   },
   {
     id: "lattice",
     title: "Lattice Helmet Liner Research",
     kicker: "RESEARCH · SIMULATION · ML",
     what:
-      "Research into 3D-printed TPU lattice liners for football helmets that reduce both linear and rotational impact, the two components linked to concussion.",
+      "Research into 3D-printed TPU lattice liners for football helmets that reduce both linear and rotational impact, the two components linked to concussion. A self-running ML + FEA loop designs lattices, simulates crushing them and decides what to try next.",
     role: "[[Confirm: led the computational side (geometry generation, ML pipeline, material characterization plan) within a two-team structure.]]",
     built: [
-      "Parametric generator for lattice tiles (gyroid, TPMS and strut families, cross-family blends) → printable STL",
-      "ML pipeline: feature importance (RF/XGBoost + SHAP), Gaussian-process surrogate, multi-objective Bayesian optimization that proposes the next design to print",
-      "Physics-informed surrogate prior (Gibson–Ashby density scaling)",
-      "Hyperelastic material characterization plan (ASTM D412 tension, pure shear, equibiaxial) for a SimScale Ogden fit",
-      "Fusion 360 add-in that pulls generated geometry into CAD",
+      "Generative geometry: nine lattice families (gyroid, Schwarz P, diamond, re-entrant, honeycomb, elytra, Voronoi, spinodoid, Bouligand) blended into one field, then meshed to printable STL",
+      "Self-running design loop: Latin-hypercube seeding → Gaussian-process surrogate → multi-objective Bayesian optimization (qEHVI) → FEA → retrain, with a diminishing-returns stopping rule",
+      "Printability screen before any solver time: unsupported-overhang fraction and disconnected bodies",
+      "CalculiX FEA pipeline: tetrahedral meshing, hyperelastic TPU card, quasi-static crush; 2×2×2-cell screening pieces checked against full tiles",
+      "Analysis that caught the loop optimizing the wrong thing, and a re-scoring by cushioning efficiency",
+      "Upstream: RF/XGBoost + SHAP feature importance, Gibson–Ashby physics prior, TPU hyperelastic characterization plan (ASTM D412, pure shear, equibiaxial)",
     ],
     result:
-      "Pipeline complete and validated on synthetic data; physical impact testing against the Virginia Tech STAR protocol is next. [[Update when real results exist.]]",
+      "First autonomous run: 133 designs proposed, 27 simulated to a clean 20% crush, stopped itself after 25 iterations (~9.5 h of solver time). It identified two Schwarz P / diamond / elytra blends with nearly flat plateaus (η ≈ 0.82–0.87). Physical impact testing (Virginia Tech STAR protocol) is next.",
     links: [],
-    tags: ["Python", "BoTorch", "XGBoost", "SHAP", "Fusion 360 API", "FEA"],
+    tags: ["Python", "BoTorch", "CalculiX FEA", "XGBoost", "SHAP", "trimesh", "Fusion 360 API"],
     demo: "lattice",
   },
   {
@@ -123,24 +129,10 @@ export const projects: Project[] = [
       "Next.js + Tailwind build deployed on Vercel",
       "Web-optimized company footage and a pilot-program sign-up flow",
     ],
-    result: "[[Live? Confirm founder is OK with it being featured.]]",
-    links: [],
+    result: "Live as the company's public website.",
+    links: [{ label: "goev2.com", href: "https://goev2.com/" }],
     tags: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
     demo: "none",
-    draft: true,
-  },
-  {
-    id: "rndp",
-    title: "RNDP.AI",
-    kicker: "AI · PRODUCT",
-    what: "[[One sentence: what is it?]]",
-    role: "[[What did you personally do?]]",
-    built: ["[[Specific contributions]]"],
-    result: "[[Result]]",
-    links: [],
-    tags: [],
-    demo: "none",
-    draft: true,
   },
   {
     id: "shuttleranked",
@@ -158,3 +150,27 @@ export const projects: Project[] = [
 ];
 
 export const stack = ["Python", "TypeScript / React", "Rust (Tauri)", "Fusion 360 API", "ML: BoTorch, XGBoost", "VEX V5"];
+
+// The hackathon team gets its own page (#/nocoast). Add each new event to the top of `hackathons`.
+export const nocoast = {
+  name: "NoCoast",
+  github: "https://github.com/nocoastaec",
+  about:
+    "[[One or two sentences: who NoCoast is. e.g. a student team that builds at hackathons and open-sources every project.]]",
+  hackathons: [
+    {
+      event: "[[AEC International Hackathon]]",
+      date: "September 2026",
+      project: "Tekt (NoCoast-AEC)",
+      summary: "Prompt → BIM → IFC: describe a building in one sentence and get a real IFC model back, viewable in the browser or a 5 MB desktop app.",
+      award: "[[Best Design; only high-school team of seven]]",
+      myPart: "Founding member and repo admin. Scaffolding, IFC-generation design with the backend developer, UI redesign, Tauri desktop app, tekt rebrand, Rome demo, presentation site and docs.",
+      links: [
+        { label: "Live demo", href: "https://nocoast-aec-site.vercel.app" },
+        { label: "Repository", href: "https://github.com/nocoastaec/NoCoast-AEC" },
+        { label: "App (web)", href: "https://nocoast-aec.vercel.app" },
+      ],
+      stack: ["React", "That Open Engine", "FastAPI", "IfcOpenShell", "Tauri / Rust", "Claude"],
+    },
+  ],
+};

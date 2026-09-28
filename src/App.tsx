@@ -1,19 +1,21 @@
-import { Fragment, useCallback, useState, type ReactNode } from "react";
+import { Fragment, useCallback, useEffect, useState, type ReactNode } from "react";
 import { Label, Lead, Reveal } from "./components/bits";
 import { Icon } from "./components/Icon";
 import { Loader } from "./components/Loader";
+import { T } from "./components/T";
 import { reducedMotion } from "./lib/motion";
 import { EMAIL, GITHUB, NAME, intro, projects, stack, type Demo, type Project } from "./content";
 import { CadDiffDemo } from "./demos/CadDiffDemo";
-import { LatticeDemo } from "./demos/LatticeDemo";
+import { LatticeLoop } from "./demos/lattice/LatticeLoop";
+import { NoCoastPage } from "./NoCoastPage";
 import { MaterialsDemo } from "./demos/MaterialsDemo";
 
 // Unfinished entries stay visible while writing (npm run dev) and never ship.
 const shown = projects.filter((p) => !(p.draft && import.meta.env.PROD));
 
-const DEMOS: Record<Exclude<Demo, "none">, { file: string; el: () => ReactNode }> = {
+const DEMOS: Record<Exclude<Demo, "none">, { file: string; el: () => ReactNode; wide?: boolean }> = {
   materials: { file: "AssignVexMaterials · rules", el: () => <MaterialsDemo /> },
-  lattice: { file: "generate_tiles · TPMS slice", el: () => <LatticeDemo /> },
+  lattice: { file: "runs/loop_2026-09-14 · real FEA output", el: () => <LatticeLoop />, wide: true },
   "cad-diff": { file: "NexusCadDiff · sample export", el: () => <CadDiffDemo /> },
 };
 
@@ -21,6 +23,7 @@ export default function App() {
   // Reduced-motion visitors skip the intro animation entirely.
   const [loading, setLoading] = useState(() => !reducedMotion());
   const done = useCallback(() => setLoading(false), []);
+  const route = useRoute();
 
   return (
     <>
@@ -29,12 +32,14 @@ export default function App() {
         <a className="brand" href="#top"><Mark /> <b>{NAME}</b></a>
         <div className="nav-links">
           <a href="#projects">Projects</a>
+          <a href="#/nocoast" className={route === "nocoast" ? "on" : ""}>NoCoast</a>
           <a href="#contact">Contact</a>
         </div>
         <a className="btn btn-green" href={GITHUB} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> GitHub</a>
       </nav>
 
       <main id="top">
+        {route === "nocoast" ? <NoCoastPage /> : <>
         <section className="intro">
           <div className="blueprint" aria-hidden="true" />
           <div className="wrap center">
@@ -72,6 +77,7 @@ export default function App() {
         </section>
 
         {shown.map((p, i) => <ProjectSection key={p.id} p={p} n={i + 1} />)}
+        </>}
 
         <section className="closing" id="contact">
           <div className="dots" aria-hidden="true" />
@@ -115,7 +121,7 @@ function ProjectSection({ p, n }: { p: Project; n: number }) {
           <Reveal delay={80}><p className="proj-what"><T>{p.what}</T></p></Reveal>
         </div>
 
-        <div className={`proj-grid ${demo ? "" : "no-demo"}`}>
+        <div className={`proj-grid ${demo ? (demo.wide ? "wide-demo" : "") : "no-demo"}`}>
           <Reveal className="facts">
             <Fact label="MY ROLE"><p><T>{p.role}</T></p></Fact>
             <Fact label="WHAT I BUILT">
@@ -124,6 +130,7 @@ function ProjectSection({ p, n }: { p: Project; n: number }) {
             <Fact label="RESULT"><p><T>{p.result}</T></p></Fact>
             {p.tags.length > 0 && <div className="tags">{p.tags.map((t) => <span key={t}>{t}</span>)}</div>}
             <div className="links">
+              {p.page && <a className="btn btn-green" href={p.page.href}>{p.page.label} <span aria-hidden="true">→</span></a>}
               {p.links.length === 0 && <span className="dim">Code is private while the work is unpublished.</span>}
               {p.links.map((l) => (
                 <a key={l.href} className="btn btn-light" href={l.href} target="_blank" rel="noreferrer">
@@ -159,14 +166,8 @@ function Fact({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-/** Renders [[placeholder]] text as a highlighted to-do, so gaps are impossible to miss before launch. */
-function T({ children }: { children: string }) {
-  const parts = children.split(/(\[\[.*?\]\])/);
-  return <>{parts.map((s, i) => (s.startsWith("[[") ? <mark key={i} className="todo">{s.slice(2, -2)}</mark> : s))}</>;
-}
-
 /** Small BCC-cell mark, echoing the loader. */
-function Mark() {
+export function Mark() {
   return (
     <svg className="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinejoin="round" aria-hidden="true">
       <path d="M12 2 21 7v10l-9 5-9-5V7Z" />
@@ -174,4 +175,27 @@ function Mark() {
       <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none" />
     </svg>
   );
+}
+
+/** "#/nocoast" is a page; any other hash is an anchor on the home page. */
+function useRoute() {
+  const read = () => (location.hash.startsWith("#/nocoast") ? "nocoast" : "home");
+  const [route, setRoute] = useState(read);
+  useEffect(() => {
+    const on = () => {
+      const next = read();
+      setRoute(next);
+      // An anchor clicked from another page only exists after the home page renders.
+      requestAnimationFrame(() => {
+        const id = location.hash.slice(1);
+        const el = id && !id.startsWith("/") ? document.getElementById(id) : null;
+        if (el) el.scrollIntoView();
+        else if (id.startsWith("/")) window.scrollTo(0, 0);
+      });
+    };
+    addEventListener("hashchange", on);
+    if (location.hash.length > 2) on(); // a shared link like /#lattice lands before the page has rendered
+    return () => removeEventListener("hashchange", on);
+  }, []);
+  return route;
 }
