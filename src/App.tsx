@@ -127,7 +127,7 @@ function ProjectSection({ p, n }: { p: Project; n: number }) {
             <Fact label="WHAT I BUILT">
               <ul>{p.built.map((b) => <li key={b}><T>{b}</T></li>)}</ul>
             </Fact>
-            <Fact label="RESULT"><p><T>{p.result}</T></p></Fact>
+            {p.result && <Fact label="RESULT"><p><T>{p.result}</T></p></Fact>}
             {p.tags.length > 0 && <div className="tags">{p.tags.map((t) => <span key={t}>{t}</span>)}</div>}
             <div className="links">
               {p.page && <a className="btn btn-accent" href={p.page.href}>{p.page.label} <span aria-hidden="true">→</span></a>}

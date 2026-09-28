@@ -66,7 +66,7 @@ export const projects: Project[] = [
     kicker: "RESEARCH · SIMULATION · ML",
     what:
       "Research into 3D-printed TPU lattice liners for football helmets that reduce both linear and rotational impact, the two components linked to concussion. A self-running ML + FEA loop designs lattices, simulates crushing them and decides what to try next.",
-    role: "[[Confirm: led the computational side (geometry generation, ML pipeline, material characterization plan) within a two-team structure.]]",
+    role: "Led the computational side (geometry generation, the ML + FEA loop, material characterization plan) in a two-team structure: a testing/hardware team and an ML team.",
     built: [
       "Generative geometry: nine lattice families (gyroid, Schwarz P, diamond, re-entrant, honeycomb, elytra, Voronoi, spinodoid, Bouligand) blended into one field, then meshed to printable STL",
       "Self-running design loop: Latin-hypercube seeding → Gaussian-process surrogate → multi-objective Bayesian optimization (qEHVI) → FEA → retrain, with a diminishing-returns stopping rule",
@@ -88,7 +88,7 @@ export const projects: Project[] = [
     kicker: "CAD · AUTOMATION · OPEN SOURCE",
     what:
       "An open-source set of Fusion 360 scripts and add-ins that automate the slow, error-prone parts of CADing a 775-part competition robot.",
-    role: "Designed and tested every tool on my team's 8780E robot assembly, then cleaned them up and published them for other teams. [[Confirm wording]]",
+    role: "Designed and tested every tool on my team's 8780E robot assembly, then cleaned them up and published them for other teams.",
     built: [
       "Rule-based material assignment across the whole robot, so mass and center of gravity are real",
       "Rigid-group setup and joint diagnostics for a moving assembly",
@@ -107,7 +107,7 @@ export const projects: Project[] = [
     kicker: "ROBOTICS · SOFTWARE · AI",
     what:
       "A desktop engineering-notebook app for VEX teams that drafts design-iteration pages directly from changes in the robot's CAD.",
-    role: "[[Confirm: sole developer.]]",
+    role: "Sole developer.",
     built: [
       "Electron notebook app with block-based pages and Word export",
       "Fusion add-in that diffs CAD versions: mass, center of gravity, parts added/removed, parameters",
@@ -115,7 +115,7 @@ export const projects: Project[] = [
       "AI interview flow: asks targeted questions about each change, then writes the page in the team's voice",
       "Robot spec export (mass, footprint, yaw inertia) for a driving simulator",
     ],
-    result: "[[Users / teams / competition use?]]",
+    result: "",
     links: [{ label: "GitHub", href: "https://github.com/kyriosroboticsdev/Nexus-VEX" }],
     tags: ["Electron", "JavaScript", "Python", "Fusion 360 API", "LLMs"],
     demo: "cad-diff",
@@ -148,7 +148,7 @@ export const projects: Project[] = [
       "Deployed and running in production",
     ],
     result: "Live with 30 active users, and up to 50 peak users a day.",
-    links: [], // [[Add the live URL and/or repo link]]
+    links: [], // TODO: live URL and/or repo link
     tags: [],
     demo: "none",
   },
@@ -161,7 +161,7 @@ export const nocoast = {
   name: "NoCoast",
   github: "https://github.com/nocoastaec",
   about:
-    "[[One or two sentences: who NoCoast is. e.g. a student team that builds at hackathons and open-sources every project.]]",
+    "A student team that builds at hackathons and open-sources every project it makes.",
   hackathons: [
     {
       event: "AEC International Hackathon",
