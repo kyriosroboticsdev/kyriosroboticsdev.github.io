@@ -13,7 +13,7 @@ export const intro = {
   thread: ["Physical systems", "Robotics", "CAD", "Software", "AI", "Tools for people"],
 };
 
-export type Demo = "materials" | "lattice" | "cad-diff" | "site" | "none";
+export type Demo = "materials" | "lattice" | "cad-diff" | "elo" | "site" | "none";
 
 
 export interface Project {
@@ -126,17 +126,19 @@ export const projects: Project[] = [
     id: "ev2",
     title: "EV² Website",
     kicker: "PROFESSIONAL · WEB",
-    what: "A video-led website redesign for EV², a startup building self-driving-capable electric ATVs.",
-    role: "Website designer and developer, working directly with the founder.",
+    what: "The public website for EV², a startup building AI-powered, self-driving-capable electric ATVs and utility vehicles.",
+    role: "Website designer and developer, working directly with the founder. I built the first redesign, then hand-coded the current version.",
     built: [
-      "Repositioned the site from a spec sheet into a customer experience",
-      "Next.js + Tailwind build deployed on Vercel",
-      "Web-optimized company footage and a pilot-program sign-up flow",
+      "Repositioned the site from an engineering spec sheet into a video-led customer experience",
+      "First version: Next.js + Tailwind on Vercel, with a pilot-program sign-up flow",
+      "Current version, hand-coded: terrain-by-terrain showcase (mud, snow, desert, mining…), specs matrix, booking and fleet-quote flows",
+      "Web-optimized company footage throughout",
     ],
     result: "Live as the company's public website.",
     links: [{ label: "goev2.com", href: "https://goev2.com/" }],
-    tags: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
-    demo: "none",
+    tags: ["JavaScript", "Vite", "CSS", "Next.js (v1)", "AWS S3"],
+    demo: "site",
+    site: { url: "https://goev2.com/", poster: "shots/ev2.webp" },
   },
   {
     id: "shuttleranked",
@@ -145,14 +147,18 @@ export const projects: Project[] = [
     what: "Compete with your friends to see who's objectively the best badminton player. Every match you log moves an Elo rating, so the leaderboard settles it.",
     role: "Sole developer. I designed and built the whole app, front to back.",
     built: [
-      "Full-stack web app: frontend, backend and data layer",
-      "Elo rating algorithm written from scratch",
-      "Deployed and running in production",
+      "Full-stack app: React front end, Firebase auth and Firestore data, deployed on Vercel",
+      "Elo rating written from scratch: K scales with margin of victory, match length and deuce sets",
+      "Singles and doubles ladders, friend groups with invites, tournaments, rating-history charts",
+      "Anti-farming: global ratings move at most once every 2 hours per player",
     ],
     result: "Live with 30 active users, and up to 50 peak users a day.",
-    links: [], // TODO: live URL and/or repo link
-    tags: [],
-    demo: "none",
+    links: [
+      { label: "Live app", href: "https://shuttleranked.vercel.app/" },
+      { label: "GitHub", href: "https://github.com/kyriosroboticsdev/shuttleranked" },
+    ],
+    tags: ["React", "Vite", "Firebase", "Recharts", "Vercel"],
+    demo: "elo",
   },
 ];
 

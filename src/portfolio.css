@@ -227,3 +227,22 @@ mark.todo { background: var(--accent-soft); color: var(--accent-2); outline: 1px
 .site-poster img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: filter .25s; }
 .site-poster:hover img { filter: brightness(.8); }
 .site-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--accent); color: #fbf5d8; font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 13px 18px; border-radius: 999px; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .5); white-space: nowrap; }
+
+/* ---------- Elo demo ---------- */
+.elo-players { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.elo-card { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 8px; background: var(--panel); }
+.elo-card.won { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.elo-name { font: 500 11px var(--mono); letter-spacing: .12em; color: var(--muted); display: flex; justify-content: space-between; }
+.elo-badge { color: var(--accent); }
+.elo-rating { display: flex; align-items: baseline; gap: 8px; }
+.elo-rating b { font-size: 34px; font-weight: 500; letter-spacing: -.04em; line-height: 1; }
+.elo-rating .up { font: 600 13px var(--mono); color: var(--accent); }
+.elo-rating .down { font: 600 13px var(--mono); color: var(--warn); }
+.elo-card .chip { justify-self: start; }
+.elo-card .chip:disabled { opacity: .6; cursor: default; }
+.elo-sets { display: flex; gap: 8px; flex-wrap: wrap; }
+.elo-sets span { font: 600 15px var(--mono); padding: 6px 12px; border-radius: 6px; background: var(--dark); color: #fbf5d8; }
+.elo-sets span.deuce { background: var(--accent); }
+.readout-row.total { border-top: 1px dashed var(--line-2); padding-top: 8px; margin-top: 2px; }
+.readout-row.total b { color: var(--accent); }
+@media (max-width: 640px) { .elo-players { grid-template-columns: 1fr; } }

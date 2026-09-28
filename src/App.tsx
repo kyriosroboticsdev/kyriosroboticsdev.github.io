@@ -10,6 +10,7 @@ import { LatticeLoop } from "./demos/lattice/LatticeLoop";
 import { NoCoastPage } from "./NoCoastPage";
 import { MaterialsDemo } from "./demos/MaterialsDemo";
 import { LiveSite } from "./demos/LiveSite";
+import { EloDemo } from "./demos/EloDemo";
 
 // Unfinished entries stay visible while writing (npm run dev) and never ship.
 const shown = projects.filter((p) => !(p.draft && import.meta.env.PROD));
@@ -18,6 +19,7 @@ const DEMOS: Record<Exclude<Demo, "none" | "site">, { file: string; el: () => Re
   materials: { file: "AssignVexMaterials · rules", el: () => <MaterialsDemo /> },
   lattice: { file: "runs/loop_2026-09-14 · real FEA output", el: () => <LatticeLoop />, wide: true },
   "cad-diff": { file: "NexusCadDiff · sample export", el: () => <CadDiffDemo /> },
+  elo: { file: "shuttleranked · calcElo()", el: () => <EloDemo /> },
 };
 
 export default function App() {
