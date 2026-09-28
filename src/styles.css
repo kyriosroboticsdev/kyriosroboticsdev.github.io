@@ -1,24 +1,72 @@
+/* Two themes, one set of names. Light: pale banana surfaces, deep purple ink.
+   Dark: the same pair swapped. "inv-*" styles the contrasting footer band, and "dark" is
+   the contrasting surface used for chips and tooltips (purple in light mode, banana in dark). */
 :root {
-  --bg: #f7efc8;
-  --bg-2: #efe4b0;
-  --panel: #fcf8e4;
-  --panel-2: #f4ebc4;
-  --ink: #22123a;
-  --ink-2: #45305f;
-  --muted: #7d6c86;
-  --line: #dccf97;
-  --line-2: #c7b777;
-  --accent: #5b2d8e;
-  --accent-2: #47216f;
-  --accent-soft: #e9ddf0;
-  --dark: #22123a;
-  --dark-2: #2e1a4b;
+  --bg: #fbf7e6;
+  --bg-2: #f4eed3;
+  --panel: #fffcf1;
+  --panel-2: #f8f2dc;
+  --ink: #1a0a2e;
+  --ink-2: #3a2552;
+  --muted: #7a6a86;
+  --line: #e6ddb8;
+  --line-2: #d2c592;
+  --accent: #3d1869;
+  --accent-2: #2c0f50;
+  --accent-soft: #ebe2f2;
+  --dark: #1a0a2e;
+  --dark-2: #251240;
+  --on-accent: #fbf7e6;
+  --on-dark: #fbf7e6;
+  --inv-ink: #fbf5d8;
+  --inv-ink-2: #d9cce6;
+  --inv-muted: #a898b8;
+  --inv-label: #f2d45c;
+  --inv-line: #4f3a6e;
+  --inv-rule: #33204f;
+  --inv-dots: #3f2a5c;
+  --lead-muted: #8a7a95;
+  --shadow: rgba(40, 15, 70, .26);
+  --cat-1: #6b3fa0;   /* validated pair on the light surface (CVD ΔE 26.7) */
+  --cat-2: #c2650a;
   --warn: #8a5a12;
   --bad: #9b2c22;
   --sans: "Geist", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
   --radius: 10px;
   --wrap: 1180px;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #170a28;
+  --bg-2: #1e0f33;
+  --panel: #231238;
+  --panel-2: #1c0d30;
+  --ink: #fbf5d8;
+  --ink-2: #e6dcb6;
+  --muted: #a898b8;
+  --line: #3a2654;
+  --line-2: #57407a;
+  --accent: #f2d45c;
+  --accent-2: #e6c43d;
+  --accent-soft: #33234a;
+  --dark: #fbf5d8;
+  --dark-2: #f2ead0;
+  --on-accent: #1a0a2e;
+  --on-dark: #1a0a2e;
+  --inv-ink: #1a0a2e;
+  --inv-ink-2: #3a2552;
+  --inv-muted: #6f5f7c;
+  --inv-label: #3d1869;
+  --inv-line: #c9bb88;
+  --inv-rule: #e2d7ae;
+  --inv-dots: #ddd09e;
+  --lead-muted: #9d8db0;
+  --shadow: rgba(0, 0, 0, .5);
+  --cat-1: #bb8d18;   /* validated pair on the dark surface (CVD ΔE 30.0) */
+  --cat-2: #9a72f2;
+  --warn: #e3a24a;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -87,7 +135,7 @@ button:disabled { cursor: not-allowed; }
 .brand { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; letter-spacing: -.02em; }
 .brand b { font-weight: 600; }
 .brand span { color: var(--muted); font-weight: 500; }
-.brand.light { color: #fbf5d8; }
+.brand.light { color: var(--inv-ink); }
 .logo { width: 22px; height: 22px; }
 .nav-links { display: flex; gap: 28px; font-size: 14px; }
 .nav-links a { color: var(--ink-2); transition: color .2s; }
@@ -101,11 +149,11 @@ button:disabled { cursor: not-allowed; }
   transition: background .2s, transform .2s, border-color .2s;
 }
 .btn:hover { transform: translateY(-1px); }
-.btn-accent { background: var(--accent); color: #fbf5d8; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 2px rgba(0, 0, 0, .15); }
+.btn-accent { background: var(--accent); color: var(--on-accent); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 2px rgba(0, 0, 0, .15); }
 .btn-accent:hover { background: var(--accent-2); }
 .btn-light { background: var(--panel); border-color: var(--line); box-shadow: 0 1px 2px rgba(0, 0, 0, .06); }
-.btn-outline { border-color: #5a4478; color: #f7efc8; }
-.btn-outline:hover { border-color: #8d77a8; }
+.btn-outline { border-color: var(--inv-line); color: var(--inv-ink); }
+.btn-outline:hover { border-color: var(--inv-muted); }
 
 /* ---------- shared type ---------- */
 .label {
@@ -114,8 +162,8 @@ button:disabled { cursor: not-allowed; }
   margin-bottom: 26px; white-space: pre;
 }
 .label-mark { color: var(--ink-2); font-size: 13px; }
-.label-dark { color: #f2d45c; }
-.label-dark .label-mark { color: #b9a9c9; }
+.label-dark { color: var(--inv-label); }
+.label-dark .label-mark { color: var(--inv-muted); }
 
 .lead {
   font-weight: 500; letter-spacing: -.045em; line-height: 1.02;
@@ -129,7 +177,7 @@ h2.lead { font-size: clamp(32px, 4.6vw, 56px); max-width: 22ch; line-height: 1.0
   transition: opacity .7s, transform .8s cubic-bezier(.2, .7, .2, 1);
 }
 .lead.in .word { opacity: 1; transform: none; }
-.lead .word.muted { color: #8a7a95; }
+.lead .word.muted { color: var(--lead-muted); }
 
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s, transform .9s cubic-bezier(.2, .7, .2, 1); }
 .reveal.in { opacity: 1; transform: none; }
@@ -144,7 +192,7 @@ h2.lead { font-size: clamp(32px, 4.6vw, 56px); max-width: 22ch; line-height: 1.0
 }
 .intro-sub { max-width: 620px; margin: 24px auto 44px; color: var(--ink-2); font-size: 18px; text-wrap: pretty; }
 /* ---------- closing ---------- */
-.closing { position: relative; margin-top: 130px; background: var(--dark); color: #f7efc8; padding: 120px 0 40px; overflow: hidden; }
+.closing { position: relative; margin-top: 130px; background: var(--dark); color: var(--inv-ink); padding: 120px 0 40px; overflow: hidden; }
 /* The mask stays put while an oversized dot layer slides under it. Moving the layer with transform runs on
    the compositor; animating background-position repainted the whole section every frame. */
 .dots {
@@ -153,18 +201,18 @@ h2.lead { font-size: clamp(32px, 4.6vw, 56px); max-width: 22ch; line-height: 1.0
 }
 .dots::before {
   content: ""; position: absolute; top: -70px; left: -140px; right: 0; bottom: 0;
-  background-image: radial-gradient(#4a3366 1.1px, transparent 1.3px);
+  background-image: radial-gradient(var(--inv-dots) 1.1px, transparent 1.3px);
   background-size: 14px 14px;
   animation: drift 30s linear infinite; will-change: transform;
 }
 @keyframes drift { to { transform: translate(140px, 70px); } }
 .closing-title { font-size: clamp(34px, 5vw, 62px); font-weight: 500; letter-spacing: -.045em; line-height: 1.04; margin: 0; }
-.closing-sub { color: #c9bcd6; max-width: 520px; margin: 22px auto 34px; font-size: 17px; }
+.closing-sub { color: var(--inv-ink-2); max-width: 520px; margin: 22px auto 34px; font-size: 17px; }
 .closing-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.footer { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 30px; margin-top: 140px; padding-top: 36px; border-top: 1px solid #3a2656; font-size: 14px; }
+.footer { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 30px; margin-top: 140px; padding-top: 36px; border-top: 1px solid var(--inv-rule); font-size: 14px; }
 .footer > div { display: flex; flex-direction: column; gap: 9px; }
-.footer a, .footer span { color: #ddd0e8; }
-.footer a:hover { color: #fff; }
-.footer-head { font: 500 12px var(--mono); letter-spacing: .12em; color: #a898b8; margin-bottom: 4px; }
-.footer-note { margin: 6px 0 0; color: #a898b8; }
+.footer a, .footer span { color: var(--inv-ink-2); }
+.footer a:hover { color: var(--inv-ink); }
+.footer-head { font: 500 12px var(--mono); letter-spacing: .12em; color: var(--inv-muted); margin-bottom: 4px; }
+.footer-note { margin: 6px 0 0; color: var(--inv-muted); }
 

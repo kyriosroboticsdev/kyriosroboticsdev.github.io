@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Convergence, StressStrain, Tradeoff, AMBER, PURPLE, catOf, colorOf, type Design } from "./charts";
 import { Turntable } from "./Turntable";
+import { useTheme } from "../../lib/theme";
 
 interface LoopData {
   run: string; solver: string; stopReason: string; stoppedAt: number;
@@ -17,6 +18,7 @@ export function LatticeLoop() {
   const [data, setData] = useState<LoopData | null>(null);
   const [sel, setSel] = useState<string>("it005_0");
   const [tab, setTab] = useState<"curve" | "tradeoff" | "loop">("tradeoff");
+  const [theme] = useTheme();
 
   useEffect(() => {
     fetch(`${BASE}lattice/data.json`).then((r) => r.json()).then(setData).catch(() => setData(null));
@@ -47,7 +49,7 @@ export function LatticeLoop() {
 
       <div className="loop-grid">
         <div className="loop-mesh">
-          {d.mesh && d.frames && <Turntable src={`${BASE}${d.mesh}`} frames={d.frames} label={`Rendered views of lattice design ${d.id}`} />}
+          {d.mesh && d.frames && <Turntable src={`${BASE}${theme === "dark" && d.meshDark ? d.meshDark : d.mesh}`} frames={d.frames} label={`Rendered views of lattice design ${d.id}`} />}
           <div className="mesh-cap">
             <b>{d.id}</b> · {catOf(d) === "eta" ? "best-cushion front" : "SEA front (what the loop chased)"}<br />
             {d.blend.slice(0, 4).map(([n, w]) => `${n} ${Math.round(w * 100)}%`).join(" / ")}<br />

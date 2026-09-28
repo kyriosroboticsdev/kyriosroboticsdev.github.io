@@ -5,6 +5,7 @@ import { Loader } from "./components/Loader";
 import { T } from "./components/T";
 import { ContactButtons } from "./components/Contact";
 import { reducedMotion } from "./lib/motion";
+import { useTheme } from "./lib/theme";
 import { GITHUB, NAME, intro, projects, stack, type Demo, type Project } from "./content";
 import { CadDiffDemo } from "./demos/CadDiffDemo";
 import { LatticeLoop } from "./demos/lattice/LatticeLoop";
@@ -39,7 +40,10 @@ export default function App() {
           <a href="#/nocoast" className={route === "nocoast" ? "on" : ""}>NoCoast</a>
           <a href="#contact">Contact</a>
         </div>
-        <a className="btn btn-accent" href={GITHUB} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> GitHub</a>
+        <div className="nav-right">
+          <ThemeToggle />
+          <a className="btn btn-accent" href={GITHUB} target="_blank" rel="noreferrer"><Icon name="github" size={14} /> GitHub</a>
+        </div>
       </nav>
 
       <main id="top">
@@ -209,4 +213,18 @@ function useRoute() {
     return () => removeEventListener("hashchange", on);
   }, []);
   return route;
+}
+
+function ThemeToggle() {
+  const [theme, toggle] = useTheme();
+  const dark = theme === "dark";
+  return (
+    <button className="theme-btn" onClick={toggle} aria-label={dark ? "Switch to light mode" : "Switch to dark mode"} title={dark ? "Light mode" : "Dark mode"}>
+      <svg width={17} height={17} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        {dark
+          ? <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" />
+          : <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" />}
+      </svg>
+    </button>
+  );
 }

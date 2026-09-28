@@ -35,7 +35,8 @@ FEATURED = ["it005_0", "it004_0", "it015_0", "it018_1", "it020_1", "it014_0"]
 
 # Turntable: FRAMES views around the vertical axis, packed COLS wide into one sprite sheet.
 FRAMES, COLS, PX = 60, 10, 440
-COLORS = {"eta": "#6b3fa0", "sea": "#c2650a"}
+# Mesh colours per site theme; slightly brighter than the chart swatches since shading darkens them.
+COLORS = {"light": {"eta": "#6b3fa0", "sea": "#c2650a"}, "dark": {"eta": "#dcb033", "sea": "#a883f7"}}
 
 BLENDS = ["gyroid", "schwartz", "diamond", "re_entrant", "honeycomb", "elytra", "voronoi", "spinodoid", "bouligand"]
 PRETTY = {"schwartz": "Schwarz P", "re_entrant": "re-entrant", "gyroid": "gyroid", "diamond": "diamond",
@@ -121,9 +122,12 @@ def main():
         d = by_id[did]
         src = master[did]["raw_file_path"].replace("\\", os.sep)
         mesh = trimesh.load(os.path.join(REPO, src))
+        cat = "eta" if d["frontEta"] else "sea"
         out = os.path.join(OUT, did + ".webp")
-        render_turntable(mesh, COLORS["eta" if d["frontEta"] else "sea"], out)
+        render_turntable(mesh, COLORS["light"][cat], out)
+        render_turntable(mesh, COLORS["dark"][cat], os.path.join(OUT, did + "-dark.webp"))
         d["mesh"] = "lattice/%s.webp" % did
+        d["meshDark"] = "lattice/%s-dark.webp" % did
         d["frames"] = {"count": FRAMES, "cols": COLS, "px": PX}
         d["tris"] = int(len(mesh.faces))
         d["sizeMm"] = [round(float(x), 1) for x in mesh.extents]

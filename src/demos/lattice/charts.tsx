@@ -5,11 +5,12 @@ export interface Design {
   plateau: number; plateauCv: number; eta: number; frontSea: boolean; frontEta: boolean;
   blend: [string, number][]; curve: [number, number][]; mesh: string | null; sizeMm?: number[]; tris?: number;
   frames?: { count: number; cols: number; px: number };
+  meshDark?: string;
 }
 
-// Validated on the banana surface (CVD ΔE 26.7, contrast ≥ 3:1): purple = best cushions, amber = what the loop chased.
-export const PURPLE = "#6b3fa0";
-export const AMBER = "#c2650a";
+// Category colours come from theme tokens; each pair is validated against its own surface.
+export const PURPLE = "var(--cat-1)"; // themed: purple in light mode, gold in dark (see styles.css)
+export const AMBER = "var(--cat-2)";  // themed: amber in light mode, lavender in dark
 export const catOf = (d: Design) => (d.frontEta ? "eta" : d.frontSea ? "sea" : "other");
 export const colorOf = (d: Design) => (d.frontEta ? PURPLE : d.frontSea ? AMBER : "var(--line-2)");
 
