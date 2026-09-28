@@ -13,7 +13,7 @@ export const intro = {
   thread: ["Physical systems", "Robotics", "CAD", "Software", "AI", "Tools for people"],
 };
 
-export type Demo = "materials" | "lattice" | "cad-diff" | "none";
+export type Demo = "materials" | "lattice" | "cad-diff" | "site" | "none";
 
 
 export interface Project {
@@ -29,6 +29,7 @@ export interface Project {
   demo: Demo;
   page?: { label: string; href: string }; // a deeper page on this site
   privateCode?: boolean;       // say so instead of showing links
+  site?: { url: string; poster: string }; // for demo: "site", a live deployed page shown in a browser frame
   draft?: boolean;             // hidden from the live site until filled in
 }
 
@@ -57,7 +58,8 @@ export const projects: Project[] = [
       { label: "My rebrand PR (#15)", href: "https://github.com/nocoastaec/NoCoast-AEC/pull/15" },
     ],
     tags: ["React", "TypeScript", "Python", "IfcOpenShell", "Tauri / Rust", "LLMs"],
-    demo: "none",
+    demo: "site",
+    site: { url: "https://nocoast-aec-site.vercel.app/", poster: "shots/tekt.webp" },
     page: { label: "NoCoast team page", href: "#/nocoast" },
   },
   {

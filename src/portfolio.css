@@ -214,3 +214,16 @@ mark.todo { background: var(--accent-soft); color: var(--accent-2); outline: 1px
   .hack { grid-template-columns: 1fr; }
   .hack-meta { border-right: 0; border-bottom: 1px dashed var(--line-2); }
 }
+
+/* ---------- live site embed ---------- */
+.site-body { display: grid; }
+.urlbar { display: flex; align-items: center; gap: 8px; margin: 10px 12px; padding: 6px 12px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; font: 12px var(--mono); color: var(--ink-2); }
+.urlbar .lock { color: var(--accent); font-size: 8px; }
+.urlbar .url { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.url-open { color: var(--accent); white-space: nowrap; }
+.site-frame { position: relative; overflow: hidden; border-top: 1px solid var(--line); background: var(--dark); }
+.site-frame iframe { position: absolute; top: 0; left: 0; border: 0; transform-origin: 0 0; background: #fff; }
+.site-poster { position: absolute; inset: 0; padding: 0; border: 0; background: none; display: block; }
+.site-poster img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: filter .25s; }
+.site-poster:hover img { filter: brightness(.8); }
+.site-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--accent); color: #fbf5d8; font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 13px 18px; border-radius: 999px; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .5); white-space: nowrap; }

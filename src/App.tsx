@@ -9,11 +9,12 @@ import { CadDiffDemo } from "./demos/CadDiffDemo";
 import { LatticeLoop } from "./demos/lattice/LatticeLoop";
 import { NoCoastPage } from "./NoCoastPage";
 import { MaterialsDemo } from "./demos/MaterialsDemo";
+import { LiveSite } from "./demos/LiveSite";
 
 // Unfinished entries stay visible while writing (npm run dev) and never ship.
 const shown = projects.filter((p) => !(p.draft && import.meta.env.PROD));
 
-const DEMOS: Record<Exclude<Demo, "none">, { file: string; el: () => ReactNode; wide?: boolean }> = {
+const DEMOS: Record<Exclude<Demo, "none" | "site">, { file: string; el: () => ReactNode; wide?: boolean }> = {
   materials: { file: "AssignVexMaterials · rules", el: () => <MaterialsDemo /> },
   lattice: { file: "runs/loop_2026-09-14 · real FEA output", el: () => <LatticeLoop />, wide: true },
   "cad-diff": { file: "NexusCadDiff · sample export", el: () => <CadDiffDemo /> },
@@ -111,7 +112,9 @@ export default function App() {
 }
 
 function ProjectSection({ p, n }: { p: Project; n: number }) {
-  const demo = p.demo !== "none" ? DEMOS[p.demo] : null;
+  const demo = p.demo === "site" && p.site
+    ? { file: "live site", el: () => <LiveSite url={p.site!.url} poster={`${import.meta.env.BASE_URL}${p.site!.poster}`} title={`${p.title} site`} />, wide: false }
+    : p.demo !== "none" && p.demo !== "site" ? DEMOS[p.demo] : null;
   return (
     <section className={`section project ${p.draft ? "is-draft" : ""}`} id={p.id}>
       <div className="wrap wide">
