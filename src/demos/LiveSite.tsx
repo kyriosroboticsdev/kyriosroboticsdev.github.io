@@ -7,7 +7,7 @@ const DESKTOP = 1280;
  * A real, deployed site inside a browser frame. Starts as a screenshot (fast, and works even if the
  * site is down); one click swaps in the live, fully interactive page.
  */
-export function LiveSite({ url, poster, title }: { url: string; poster: string; title: string }) {
+export function LiveSite({ url, poster, title, label }: { url: string; poster: string; title: string; label?: string }) {
   const [live, setLive] = useState(false);
   const [scale, setScale] = useState(0.5);
   const box = useRef<HTMLDivElement>(null);
@@ -25,7 +25,7 @@ export function LiveSite({ url, poster, title }: { url: string; poster: string; 
     <div className="site-body">
       <div className="urlbar">
         <span className="lock" aria-hidden="true">●</span>
-        <span className="url">{host}</span>
+        <span className="url">{label || host}</span>
         <a href={url} target="_blank" rel="noreferrer" className="url-open">Open ↗</a>
       </div>
       <div className="site-frame" ref={box} style={{ height: 800 * scale }}>

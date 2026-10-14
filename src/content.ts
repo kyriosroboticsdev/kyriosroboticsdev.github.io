@@ -35,7 +35,9 @@ export interface Project {
   demo: Demo;
   page?: { label: string; href: string }; // a deeper page on this site
   privateCode?: boolean;       // say so instead of showing links
-  site?: { url: string; poster: string }; // for demo: "site", a live deployed page shown in a browser frame
+  // For demo: "site", a live page shown in a browser frame. A relative url is a page on this site;
+  // label replaces the address shown in the frame's URL bar, file the frame's title.
+  site?: { url: string; poster: string; label?: string; file?: string };
   draft?: boolean;             // hidden from the live site until filled in
 }
 
@@ -67,6 +69,29 @@ export const projects: Project[] = [
     demo: "site",
     site: { url: "https://nocoast-aec-site.vercel.app/", poster: "shots/tekt.webp" },
     page: { label: "NoCoast team page", href: "#/nocoast" },
+  },
+  {
+    id: "wren",
+    title: "Wren OS",
+    kicker: "OPERATING SYSTEM · AI · RUST",
+    what:
+      "A lightweight Linux operating system with an AI assistant built into the desktop. It's made to run on the kind of computer most AI tools leave behind: the reference machine is a 2014 Chromebook with 2 GB of RAM.",
+    role: "Solo project, built with Claude Code. I came up with the idea, designed the desktop and how the system should work, and directed and tested every part: the agent service, the desktop shell, the bootable OS and its installer, and an Android companion app. I didn't have the OS-building knowledge to write the low-level code myself, so Claude Code wrote most of it while I made the design calls and tested the results in a VM and on my phone.",
+    built: [
+      "Agent service in Rust, a single ~6 MB binary: its own agent loop over a local model (Ollama) or the Claude API, plus a Claude Code backend; its OS tools are also served over MCP",
+      "Safety by design: reading is automatic, but writing files or running commands waits for your approval; every change goes into an undo journal, and on Linux commands run in a sandbox",
+      "Desktop: glass top bar with a “Wren island”, task tabs that run side by side on their own models, a Ctrl+K command bar, a terminal that catches failed commands, file explorer, settings and an App Store (Flathub)",
+      "Developer tools: project tabs that run build/test/dev scripts with live output, a ports & processes panel, a token and cost meter with budgets, and a router that picks a local or cloud model for each message",
+      "Bootable OS on Debian 13: greetd login screen, labwc session, .deb packages from a signed apt repository, in-OS updates with restore points",
+      "Android app (Kotlin): QR pairing with signed requests, approving Wren's actions from notifications, remote screen control",
+    ],
+    result:
+      "Boots as a real OS in a test VM sized like the Chromebook (2 GB of RAM): login screen, desktop, apps. The phone app works on a Galaxy S25. Next: install it on the Chromebook itself, then a public beta.",
+    links: [{ label: "Full-screen demo", href: "wren/index.html" }],
+    privateCode: true,
+    tags: ["Rust", "Linux / Debian", "JavaScript", "Kotlin", "Ollama", "Claude API", "MCP"],
+    demo: "site",
+    site: { url: "wren/index.html", poster: "shots/wren.webp", label: "Wren desktop · runs in your browser, replies are scripted", file: "interactive demo" },
   },
   {
     id: "lattice",

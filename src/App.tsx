@@ -124,8 +124,9 @@ export default function App() {
 }
 
 function ProjectSection({ p, n }: { p: Project; n: number }) {
-  const demo = p.demo === "site" && p.site
-    ? { file: "live site", el: () => <LiveSite url={p.site!.url} poster={`${import.meta.env.BASE_URL}${p.site!.poster}`} title={`${p.title} site`} />, wide: false }
+  const site = p.site, base = import.meta.env.BASE_URL;
+  const demo = p.demo === "site" && site
+    ? { file: site.file || "live site", el: () => <LiveSite url={/^https?:/.test(site.url) ? site.url : base + site.url} label={site.label} poster={`${base}${site.poster}`} title={`${p.title} site`} />, wide: false }
     : p.demo !== "none" && p.demo !== "site" ? DEMOS[p.demo] : null;
   return (
     <section className={`section project ${p.draft ? "is-draft" : ""}`} id={p.id}>
