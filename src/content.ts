@@ -204,6 +204,20 @@ export const nocoast = {
     "A student team that builds at hackathons and open-sources every project it makes.",
   hackathons: [
     {
+      event: "NASA Space Apps Challenge",
+      date: "November 2026",
+      project: "LunarNav",
+      summary: "Pick a landing site and a date at the Moon's south pole and find out, in plain English, whether a lander will have sunlight for power and Earth in view to talk home. Built on real NASA terrain (LOLA) and JPL ephemeris data.",
+      award: "Submitted for judging · team of 5",
+      myPart: "Science backend: Sun and Earth positions from JPL ephemerides, terrain horizon masks from NASA LOLA elevation data, sunlight and communication windows, solar power and a quick go/no-go check. Built the first dashboard and 3D sky view, and deployed the app on Microsoft Azure (Static Web Apps + Container Apps) with CI.",
+      links: [
+        { label: "Live planner", href: "https://salmon-moss-05338201e.3.azurestaticapps.net/" },
+        { label: "Walkthrough", href: "https://salmon-moss-05338201e.3.azurestaticapps.net/presentation.html" },
+        { label: "Repository", href: "https://github.com/kyriosroboticsdev/Nocoast-NasaSpaceHacks" },
+      ],
+      stack: ["Python", "FastAPI", "Skyfield", "NASA LOLA", "TypeScript", "Three.js", "Azure"],
+    },
+    {
       event: "AEC International Hackathon",
       date: "September 2026",
       project: "Tekt (NoCoast-AEC)",
@@ -216,6 +230,7 @@ export const nocoast = {
         { label: "App (web)", href: "https://nocoast-aec.vercel.app" },
       ],
       stack: ["React", "That Open Engine", "FastAPI", "IfcOpenShell", "Tauri / Rust", "Claude"],
+      writeup: "#tekt",
     },
   ],
 };

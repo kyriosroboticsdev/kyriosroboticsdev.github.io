@@ -41,7 +41,7 @@ export function NoCoastPage() {
                   {h.links.map((l) => (
                     <a key={l.href} className="btn btn-light" href={l.href} target="_blank" rel="noreferrer">{l.label} <span aria-hidden="true">↗</span></a>
                   ))}
-                  <a className="btn btn-light" href="#tekt">Full write-up →</a>
+                  {"writeup" in h && h.writeup && <a className="btn btn-light" href={h.writeup}>Full write-up →</a>}
                 </div>
               </div>
             </Reveal>
